@@ -1,0 +1,20 @@
+.app-note {
+    position: relative;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    color: white;
+    font-weight: 500;
+}
+.cross {
+    width: 24px;
+    height: 21.41px;
+    cursor: pointer;
+
+    position: absolute;
+    top: 10.3px;
+    right: 17px;
+}

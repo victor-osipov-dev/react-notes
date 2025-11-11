@@ -1,0 +1,10 @@
+.notes-page {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.notes-search {
+    margin-bottom: 26px;
+}
+

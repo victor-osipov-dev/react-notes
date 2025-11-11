@@ -1,0 +1,1 @@
+export { NotesSearch } from "./NotesSearch";

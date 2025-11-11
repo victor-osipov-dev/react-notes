@@ -1,0 +1,6 @@
+.app-chip {
+    padding: 5px 14px;
+    border-radius: 5px;
+    background: rgba(61, 61, 61, 1);
+    cursor: pointer;
+}

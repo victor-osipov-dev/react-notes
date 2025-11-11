@@ -1,6 +1,6 @@
 import { createBrowserRouter } from "react-router";
-import { NotesPage } from "../components/NotesPage";
-import { HomePage } from "../components/HomePage";
+import { NotesPage } from "@pages/NotesPage";
+import { HomePage } from "@pages/HomePage";
 import App from "./App";
 
 export const router = createBrowserRouter([

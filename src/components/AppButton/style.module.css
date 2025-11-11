@@ -1,0 +1,33 @@
+.app-button {
+    height: 50px;
+    width: fit-content;
+    display: grid;
+    place-items: center;
+    padding-inline: 16px;
+    cursor: pointer;
+    border: none;
+    background-color: white;
+    border-radius: 12px;
+
+    color: rgba(0, 0, 0, 1);
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 145%;
+    text-align: center;
+
+    transition: scale 0.2s;
+}
+.app-button:hover {
+    scale: 1.03;
+}
+
+.app-button_secondary {
+    background-color: transparent;
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    color: rgba(255, 255, 255, 1);
+}
+.app-button_gray {
+    background-color: rgba(255, 255, 255, 0.19);
+    color: white;
+}
