@@ -1,13 +1,18 @@
 import { NotesSearch } from "@components/NotesSearch";
 import { useState } from "react";
 import styles from "./style.module.css";
-import { AppCard } from "@components/AppCard";
 import clsx from "clsx";
 import { EditNote } from "@components/EditNote/EditNote";
-import { AppNote } from "../../../components/AppNote";
+import { AppNote } from "@components/AppNote";
+import { initialNotes } from "./consts";
 
 export function NotesPage() {
+    const [notes, setNotes] = useState(initialNotes);
     const [searchNoteName, setSearchNoteName] = useState("");
+
+    const newNoteId = Math.max(...notes.map(note => note.id), 0) + 1;
+
+    
 
     return (
         <>
@@ -18,10 +23,37 @@ export function NotesPage() {
                     noteName={searchNoteName}
                 ></NotesSearch>
 
-                <EditNote></EditNote>
+                <EditNote key={newNoteId} noteSave={(title, text) => setNotes([{
+                    id: newNoteId,
+                    title,
+                    text
+                }, ...notes])}></EditNote>
 
-                <AppNote title={'Name'} text={'Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.'}></AppNote>
-                <AppNote title={'Name'} text={'Далеко-далеко за словесными горами в стране, гласных и согласных живут рыбные тексты.'}></AppNote>
+                {notes.map((note, index) =>
+                    note.isEdit ? (
+                        <EditNote key={note.id} title={note.title} text={note.text} noteSave={(title, text) => setNotes(notes.toSpliced(index, 1, {
+                            id: note.id,
+                            title: title,
+                            text: text,
+                            isEdit: false
+                        }))}></EditNote>
+                    ) : (
+                        <AppNote
+                            key={note.id}
+                            title={note.title}
+                            text={note.text}
+                            handleClick={() =>
+                                setNotes(
+                                    notes.toSpliced(index, 1, {
+                                        ...note,
+                                        isEdit: true,
+                                    })
+                                )
+                            }
+                            deleteNote={() => setNotes(notes.toSpliced(index, 1))}
+                        ></AppNote>
+                    )
+                )}
             </div>
         </>
     );

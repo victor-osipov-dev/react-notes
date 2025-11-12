@@ -2,33 +2,63 @@ import { useState } from "react";
 import { AppCard } from "../AppCard";
 import styles from "./style.module.css";
 import clsx from "clsx";
-import { AppButton } from '@components/AppButton'
+import { AppButton } from "@components/AppButton";
 import { AppChip } from "../AppChip/AppChip";
+import { useClickOutside } from "../../hooks/useClickOutside";
 
-export function EditNote() {
-    const [noteName, setNoteName] = useState('Name')
-    const [noteDesc, setNoteDesc] = useState('')
+export function EditNote({ title, text, noteSave }) {
+    const [noteTitle, setNoteTitle] = useState(title ?? "");
+    const [noteText, setNoteText] = useState(text ?? "");
 
-    if (noteName || noteDesc) {
+    const handleClickOutside = () => {
+        if (noteTitle && noteText) {
+            console.log("Клик за пределами!");
+            noteSave(noteTitle, noteText);
+        }
+    };
+
+    const ref = useClickOutside(handleClickOutside);
+
+    if (noteTitle || noteText) {
         var footerElement = (
             <footer className={styles.footer}>
-                <div className={styles['footer__edit']}>
-                    <AppChip><i>I</i></AppChip>
-                    <AppChip><b>B</b></AppChip>
+                <div className={styles["footer__edit"]}>
+                    <AppChip>
+                        <i>I</i>
+                    </AppChip>
+                    <AppChip>
+                        <b>B</b>
+                    </AppChip>
                 </div>
 
-                <AppButton height="40px" type="gray">Закрыть</AppButton>
+                <AppButton
+                    onClick={() => noteSave(noteTitle, noteText)}
+                    height="40px"
+                    type="gray"
+                >
+                    Сохранить
+                </AppButton>
             </footer>
-        )
+        );
     }
 
     return (
-        <AppCard>
+        <AppCard ref={ref}>
             <div className={clsx(styles["content"])}>
-                <input onChange={(e) => setNoteName(e.target.value)} value={noteName} placeholder="Название..." className={clsx(styles.input, styles.title)}></input>
-                <input onChange={(e) => setNoteDesc(e.target.value)} value={noteDesc} placeholder="Описание..." className={clsx(styles.input)}></input>
+                <input
+                    onChange={(e) => setNoteTitle(e.target.value)}
+                    value={noteTitle}
+                    placeholder="Название..."
+                    className={clsx(styles.input, styles.title)}
+                ></input>
+                <input
+                    onChange={(e) => setNoteText(e.target.value)}
+                    value={noteText}
+                    placeholder="Описание..."
+                    className={clsx(styles.input)}
+                ></input>
             </div>
-            { footerElement }
+            {footerElement}
         </AppCard>
     );
 }

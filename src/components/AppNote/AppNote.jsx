@@ -2,15 +2,18 @@ import { AppCard } from "../AppCard";
 import styles from "./style.module.css";
 import svg from "@svg/Крестик.svg";
 
-export function AppNote({title, text}) {
+export function AppNote({ title, text, handleClick, deleteNote }) {
     return (
-        <AppCard className={styles['app-note']}>
+        <AppCard handleClick={handleClick} className={styles["app-note"]}>
             <div className={styles.content}>
                 <h4>{title}</h4>
                 <p>{text}</p>
             </div>
 
-            <img className={styles.cross} src={svg}></img>
+            <img onClick={(e) => {
+                e.stopPropagation()
+                deleteNote()
+            }} className={styles.cross} src={svg}></img>
         </AppCard>
     );
 }
