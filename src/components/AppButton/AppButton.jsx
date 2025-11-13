@@ -17,7 +17,7 @@ export function AppButton({
                     [styles["app-button_secondary"]]: type === "secondary",
                     [styles["app-button_gray"]]: type === "gray",
                 },
-                className
+                className,
             )}
             style={{
                 height: height,

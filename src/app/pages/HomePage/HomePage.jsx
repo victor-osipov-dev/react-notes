@@ -8,8 +8,14 @@ export function HomePage() {
             <h1 className={styles.title}>Приложение для заметок</h1>
 
             <div className={styles.actions}>
-                <Link to="/notes"><AppButton className={styles['app-button']}>Начать пользоваться</AppButton></Link>
-                <AppButton className={styles['app-button']} type="secondary">Отчёт</AppButton>
+                <Link to="/notes">
+                    <AppButton className={styles["app-button"]}>
+                        Начать пользоваться
+                    </AppButton>
+                </Link>
+                <AppButton className={styles["app-button"]} type="secondary">
+                    Отчёт
+                </AppButton>
             </div>
 
             <footer className={styles.footer}></footer>

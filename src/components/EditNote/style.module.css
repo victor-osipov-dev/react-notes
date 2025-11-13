@@ -1,3 +1,13 @@
+:global(.tiptap) {
+    outline: none;
+    color: white;
+}
+:global(.is-editor-empty::before) {
+    content: attr(data-placeholder);
+    color: rgba(142, 140, 140, 1);
+    pointer-events: none;
+    height: 0;
+}
 .content {
     display: flex;
     flex-direction: column;

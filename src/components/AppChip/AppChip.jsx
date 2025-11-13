@@ -1,5 +1,9 @@
-import styles from './style.module.css'
+import styles from "./style.module.css";
 
-export function AppChip({children}) {
-    return <div className={styles['app-chip']}>{children}</div>
+export function AppChip({ children, ...attrs }) {
+    return (
+        <div {...attrs} className={styles["app-chip"]}>
+            {children}
+        </div>
+    );
 }

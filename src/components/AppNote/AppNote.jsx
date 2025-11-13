@@ -7,13 +7,17 @@ export function AppNote({ title, text, handleClick, deleteNote }) {
         <AppCard handleClick={handleClick} className={styles["app-note"]}>
             <div className={styles.content}>
                 <h4>{title}</h4>
-                <p>{text}</p>
+                <p dangerouslySetInnerHTML={{ __html: text }}></p>
             </div>
 
-            <img onClick={(e) => {
-                e.stopPropagation()
-                deleteNote()
-            }} className={styles.cross} src={svg}></img>
+            <img
+                onClick={(e) => {
+                    e.stopPropagation();
+                    deleteNote();
+                }}
+                className={styles.cross}
+                src={svg}
+            ></img>
         </AppCard>
     );
 }

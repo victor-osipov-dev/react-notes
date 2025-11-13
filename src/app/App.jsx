@@ -1,12 +1,12 @@
-import { Outlet } from 'react-router'
-import './main.css'
+import { Outlet } from "react-router";
+import "./main.css";
 
 function App() {
-  return (
-    <>
-      <Outlet></Outlet>
-    </>
-  )
+    return (
+        <>
+            <Outlet></Outlet>
+        </>
+    );
 }
 
-export default App
+export default App;
