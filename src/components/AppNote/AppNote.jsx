@@ -6,8 +6,8 @@ export function AppNote({ title, text, handleClick, deleteNote }) {
     return (
         <AppCard handleClick={handleClick} className={styles["app-note"]}>
             <div className={styles.content}>
-                <h4>{title}</h4>
-                <p dangerouslySetInnerHTML={{ __html: text }}></p>
+                <h4 className={styles.title}>{title}</h4>
+                <p className={styles.text} dangerouslySetInnerHTML={{ __html: text }}></p>
             </div>
 
             <img

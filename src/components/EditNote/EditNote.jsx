@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AppCard } from "../AppCard";
+import { AppCard } from "@components/AppCard";
 import styles from "./style.module.css";
 import clsx from "clsx";
 import { AppButton } from "@components/AppButton";
@@ -8,9 +8,13 @@ import { useClickOutside } from "@hooks/useClickOutside";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
+import svg from '@svg/Ластик.svg'
 
 export function EditNote({ title, text, noteSave, deleteNote }) {
     const [noteTitle, setNoteTitle] = useState(title ?? "");
+    const [isText, setIsText] = useState(
+        text == "<p></p>" || !text ? false : true
+    );
 
     const editor = useEditor({
         extensions: [
@@ -26,25 +30,32 @@ export function EditNote({ title, text, noteSave, deleteNote }) {
                 code: false,
             }),
             Placeholder.configure({
-                placeholder: "Введите текст...",
+                placeholder: "Описание...",
                 emptyEditorClass: "is-editor-empty",
             }),
         ],
         content: text,
+        onUpdate: ({ editor }) => {
+            if (editor.getText()) {
+                setIsText(true);
+            } else {
+                setIsText(false);
+            }
+        },
     });
 
     const handleClickOutside = () => {
-        if (noteTitle || editor.getText()) {
+        if (noteTitle || isText) {
             console.log("Клик за пределами!");
             noteSave(noteTitle, editor.getHTML());
         } else {
-            deleteNote();
+            if (deleteNote) deleteNote();
         }
     };
 
     const ref = useClickOutside(handleClickOutside);
 
-    if (noteTitle || editor.getText()) {
+    if (noteTitle || isText) {
         var footerElement = (
             <footer className={styles.footer}>
                 <div className={styles["footer__edit"]}>
@@ -53,27 +64,27 @@ export function EditNote({ title, text, noteSave, deleteNote }) {
                             editor.chain().focus().toggleItalic().run()
                         }
                     >
-                        <i>I</i>
+                        <i className={styles.icon}>I</i>
                     </AppChip>
                     <AppChip
                         onClick={() =>
                             editor.chain().focus().toggleBold().run()
                         }
                     >
-                        <b>B</b>
+                        <b className={styles.icon}>B</b>
                     </AppChip>
                     <AppChip
                         onClick={() =>
                             editor.chain().focus().unsetAllMarks().run()
                         }
                     >
-                        Очистить форматирование
+                        <img className={styles.img} src={svg}></img>
                     </AppChip>
                 </div>
 
                 <AppButton
                     onClick={() => {
-                        if (noteTitle && editor.getText()) {
+                        if (noteTitle && isText) {
                             noteSave(noteTitle, editor.getHTML());
                         }
                     }}

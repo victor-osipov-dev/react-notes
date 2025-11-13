@@ -18,3 +18,16 @@
     top: 10.3px;
     right: 17px;
 }
+.title {
+    color: rgba(255, 255, 255, 1);
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 145%;
+    text-align: left;
+}
+.text p {
+    width: 100%;
+    min-height: 1.25rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}

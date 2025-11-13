@@ -1,6 +1,10 @@
 .app-chip {
-    padding: 5px 14px;
+    height: 32px;
+    padding-inline: 14px;
     border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: rgba(61, 61, 61, 1);
     cursor: pointer;
 }
