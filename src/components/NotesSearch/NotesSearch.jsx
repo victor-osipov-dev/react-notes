@@ -3,7 +3,12 @@ import styles from "./style.module.css";
 import svg from "@svg/Крестик.svg";
 import clsx from "clsx";
 
-export function NotesSearch({ noteName, setSearchNoteName, className }) {
+export function NotesSearch({
+    noteName,
+    setSearchNoteName,
+    className,
+    clearText,
+}) {
     return (
         <AppCard className={clsx(styles["notes-search"], className)}>
             <input
@@ -12,7 +17,11 @@ export function NotesSearch({ noteName, setSearchNoteName, className }) {
                 value={noteName}
                 placeholder="Поиск..."
             ></input>
-            <img className={styles.cross} src={svg}></img>
+            <img
+                onClick={() => clearText?.()}
+                className={styles.cross}
+                src={svg}
+            ></img>
         </AppCard>
     );
 }

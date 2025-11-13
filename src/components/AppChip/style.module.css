@@ -1,6 +1,7 @@
 .app-chip {
     height: 32px;
-    padding-inline: 14px;
+    min-width: 37px;
+    padding-inline: 8px;
     border-radius: 5px;
     display: flex;
     justify-content: center;

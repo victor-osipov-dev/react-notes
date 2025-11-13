@@ -10,14 +10,31 @@
 
 html {
     background: rgba(32, 33, 36, 1);
-    overflow: hidden;
+    
 }
 
 a {
     text-decoration: none;
+    color: inherit;
 }
 
 .container {
     width: 700px;
     margin: 0 auto;
+}
+
+@media (width < 1000px) {
+    .container {
+        width: 600px;
+    }
+}
+@media (width < 700px) {
+    .container {
+        width: 450px;
+    }
+}
+@media (width < 500px) {
+    .container {
+        width: 323px;
+    }
 }

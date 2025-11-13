@@ -1,3 +1,6 @@
+html:has(.home-page) {
+    overflow: hidden;
+}
 .home-page {
     min-height: 100dvh;
     display: flex;
@@ -22,27 +25,49 @@
 
 .footer {
     width: 922px;
-    height: 599px;
+    height: 350px;
     border-radius: 32px;
     box-shadow:
         0px 0px 4.4px 0px rgba(0, 0, 0, 0.06),
         0px 5px 19px 0px rgba(0, 0, 0, 0.08);
     background: rgba(255, 255, 255, 1);
+    padding-top: 82px;
+    padding-left: 68px;
 }
+.edit-note {
+    max-width: 700px;
+    
+}
+
 
 @media (width < 1000px) {
     .footer {
         width: 600px;
+        height: 290px;
+        padding-top: 50px;
+        padding-left: 50px;
+    }
+    .edit-note {
+        max-width: 450px;
     }
 }
 @media (width < 700px) {
     .footer {
         width: 327px;
+        height: 223px;
+        padding-top: 33px;
+        padding-left: 20px;
     }
     .title {
         font-size: 44px;
         text-wrap: balance;
         max-width: 500px;
+    }
+    .edit-note {
+        max-width: 276px;
+    }
+    .edit-note-button {
+        display: none;
     }
 }
 
@@ -56,4 +81,5 @@
     .app-button {
         width: 100%;
     }
+    
 }

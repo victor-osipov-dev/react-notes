@@ -1,4 +1,5 @@
 import { AppButton } from "@components/AppButton";
+import { EditNote } from "@components/EditNote";
 import styles from "./style.module.css";
 import { Link } from "react-router";
 
@@ -14,11 +15,13 @@ export function HomePage() {
                     </AppButton>
                 </Link>
                 <AppButton className={styles["app-button"]} type="secondary">
-                    Отчёт
+                    <a href="/doc.pptx">Отчёт</a>
                 </AppButton>
             </div>
 
-            <footer className={styles.footer}></footer>
+            <footer className={styles.footer}>
+                <EditNote className={styles['edit-note']} title="Текст задачи" text="<p>Описание задачи</p><p>Описание задачи</p><p>Описание задачи</p>" buttonClassName={styles['edit-note-button']}></EditNote>
+            </footer>
         </div>
     );
 }

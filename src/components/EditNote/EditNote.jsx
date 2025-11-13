@@ -10,11 +10,12 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import svg from '@svg/Ластик.svg'
 
-export function EditNote({ title, text, noteSave, deleteNote }) {
+export function EditNote({ title, text, noteSave, deleteNote, buttonClassName, ...attrs }) {
     const [noteTitle, setNoteTitle] = useState(title ?? "");
     const [isText, setIsText] = useState(
         text == "<p></p>" || !text ? false : true
     );
+    const isContent = noteTitle || isText;
 
     const editor = useEditor({
         extensions: [
@@ -45,17 +46,17 @@ export function EditNote({ title, text, noteSave, deleteNote }) {
     });
 
     const handleClickOutside = () => {
-        if (noteTitle || isText) {
+        if (isContent) {
             console.log("Клик за пределами!");
             noteSave(noteTitle, editor.getHTML());
         } else {
-            if (deleteNote) deleteNote();
+            deleteNote?.();
         }
     };
 
     const ref = useClickOutside(handleClickOutside);
 
-    if (noteTitle || isText) {
+    if (isContent) {
         var footerElement = (
             <footer className={styles.footer}>
                 <div className={styles["footer__edit"]}>
@@ -83,8 +84,9 @@ export function EditNote({ title, text, noteSave, deleteNote }) {
                 </div>
 
                 <AppButton
+                    className={clsx(buttonClassName)}
                     onClick={() => {
-                        if (noteTitle && isText) {
+                        if (isContent) {
                             noteSave(noteTitle, editor.getHTML());
                         }
                     }}
@@ -98,7 +100,7 @@ export function EditNote({ title, text, noteSave, deleteNote }) {
     }
 
     return (
-        <AppCard ref={ref}>
+        <AppCard {...attrs} ref={ref}>
             <div className={clsx(styles["content"])}>
                 <input
                     onChange={(e) => setNoteTitle(e.target.value)}

@@ -8,8 +8,7 @@ import { initialNotes } from "./consts";
 
 export function NotesPage() {
     const [notes, setNotes] = useState(
-        JSON.parse(localStorage.getItem("notes")) 
-        ?? initialNotes,
+        JSON.parse(localStorage.getItem("notes")) ?? initialNotes
     );
     const [searchNoteName, setSearchNoteName] = useState("");
 
@@ -23,6 +22,7 @@ export function NotesPage() {
                     className={styles["notes-search"]}
                     setSearchNoteName={setSearchNoteName}
                     noteName={searchNoteName}
+                    clearText={() => setSearchNoteName("")}
                 ></NotesSearch>
 
                 <EditNote
@@ -52,7 +52,7 @@ export function NotesPage() {
                                         title: title,
                                         text: text,
                                         isEdit: false,
-                                    }),
+                                    })
                                 )
                             }
                             deleteNote={() =>
@@ -60,25 +60,37 @@ export function NotesPage() {
                             }
                         ></EditNote>
                     ) : (
-                        <AppNote
-                            key={note.id}
-                            title={note.title}
-                            text={note.text}
-                            handleClick={() =>
-                                setNotes(
-                                    notes.toSpliced(index, 1, {
-                                        ...note,
-                                        isEdit: true,
-                                    }),
-                                )
-                            }
-                            deleteNote={() =>
-                                setNotes(notes.toSpliced(index, 1))
-                            }
-                        ></AppNote>
-                    ),
+                        isShowNote(note, searchNoteName) && (
+                            <AppNote
+                                key={note.id}
+                                title={note.title}
+                                text={note.text}
+                                handleClick={() =>
+                                    setNotes(
+                                        notes.toSpliced(index, 1, {
+                                            ...note,
+                                            isEdit: true,
+                                        })
+                                    )
+                                }
+                                deleteNote={() =>
+                                    setNotes(notes.toSpliced(index, 1))
+                                }
+                            ></AppNote>
+                        )
+                    )
                 )}
             </div>
         </>
+    );
+}
+
+function isShowNote(note, searchNoteName) {
+    searchNoteName = searchNoteName.toLowerCase();
+
+    return (
+        searchNoteName == "" ||
+        note.text.toLowerCase().includes(searchNoteName) ||
+        note.title.toLowerCase().includes(searchNoteName)
     );
 }
